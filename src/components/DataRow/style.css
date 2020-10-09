@@ -1,0 +1,7 @@
+.data-table__label {
+    padding: 15px 10px;
+}
+
+.data-table__label--empty {
+    padding: 10px;
+}
