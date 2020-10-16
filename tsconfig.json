@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": [
+      "es5",
       "dom",
       "dom.iterable",
       "esnext"
@@ -17,9 +18,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "types": [
+      "jest",
+      "cypress"
+    ]
   },
   "include": [
-    "src"
+    "../node_modules/cypress",
+    "./*/*.ts",
+    "./*/*.tsx",
+    "src",
+    "tests"
+  ],
+  "typeRoots": [
+    "node_modules/@types"
   ]
 }

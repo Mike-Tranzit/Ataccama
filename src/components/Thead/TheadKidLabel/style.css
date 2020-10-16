@@ -1,0 +1,13 @@
+.data-table__kit-label {
+    background-color: #FFFFFF;
+    text-align: left;
+    margin-right: 10px;
+
+}
+
+.data-table__kit-label th {
+    padding: 10px;
+    border-top: 1px solid #E3E3E3;
+    border-right: 1px solid #E3E3E3;
+    border-left: 1px solid #E3E3E3;
+}

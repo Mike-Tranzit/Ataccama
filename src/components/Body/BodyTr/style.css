@@ -1,0 +1,44 @@
+.data-table__label {
+    padding: 15px 10px;
+    text-align: left;
+    font-size: 14px;
+    background-color: #E3E3E3;
+}
+
+.data-table__label--empty {
+    padding: 15px;
+    width: 20px;
+    background-color: #E3E3E3;
+}
+
+.data-table__td--empty {
+    padding: 15px;
+    background-color: #FAFAFA;
+    width: 50px;
+    transition: background-color 1s;
+}
+
+.data-table__td {
+    font-size: 14px;
+    padding: 10px 10px;
+    text-align: left;
+    background-color: #FAFAFA;
+    transition: background-color 1s;
+}
+
+tbody tr:not(.data-table__tr-kit):hover td {
+    cursor: pointer;
+    background-color: aqua;
+}
+
+.data-table__td-kit {
+    padding: 10px;
+}
+
+.data-table__td--open::before {
+    content: "\25BC";
+}
+
+.data-table__td--close::before {
+    content: "\25B6";
+}
