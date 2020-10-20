@@ -4,8 +4,7 @@ import {generate} from "shortid";
 import {BodyTr} from "../";
 import {propsIsEqual} from "../../../utils/MemoHandler";
 
-const BodyWrapper: React.FC<BodyWrapperProps> = ({dataList, path = ''}: BodyWrapperProps): ReactElement => {
-
+const BodyWrapper: React.FC<BodyWrapperProps> = ({dataList, path}: BodyWrapperProps): ReactElement => {
     return (
         <>
             {

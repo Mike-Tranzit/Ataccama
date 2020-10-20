@@ -1,15 +1,16 @@
 import {IDataItem} from "../types";
-import _ from "lodash";
+import * as _ from "lodash";
 
 export default class StateCreator {
     constructor(public prevState: IDataItem[], private path: string, private newState: IDataItem[] = []) {
+
     }
 
     /**
      * create new initial state without del element
      */
     omitByPath() {
-        this.newState = _.toArray(_.omit(this.prevState, this.path));
+        this.newState = _.toArray(_.omit(_.cloneDeep(this.prevState), this.path));
     }
 
     checkLastPath() {
@@ -26,7 +27,7 @@ export default class StateCreator {
      * Remove and filtering (remove null, undefined) items in kids objects
      * @param pathToFilter
      */
-    private filterNewState(pathToFilter: string) {
+    private filterNewState(pathToFilter: string) {console.log(_.get(this.newState, pathToFilter));
         return _.filter(_.get(this.newState, pathToFilter), (v: any) => Boolean(v));
     }
 

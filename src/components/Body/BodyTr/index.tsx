@@ -3,15 +3,16 @@ import {DataRowProps} from "../../../types";
 import {generate} from 'shortid';
 import {DataContext} from "../../../context/DataContext";
 import {kidsIsNotEmpty} from "../../../utils/KidsHandlers";
-import { BodyTd, BodyExtraTd } from "../";
-import { propsIsEqual } from '../../../utils/MemoHandler';
+import {BodyTd, BodyExtraTd} from "../";
+import {childVisibleInitialState} from "../../../utils/ChildVisibleInitialState";
 import './style.css';
 
 
-const BodyTr: React.FC<DataRowProps> = ({ item, path}: DataRowProps): ReactElement => {
-    const [opened, setOpen] = useState<boolean>(false);
+const BodyTr: React.FC<DataRowProps> = ({item, path}: DataRowProps): ReactElement => {
+    const {removeHandler, lastRemovePath} = useContext<any>(DataContext);
+    const initState = childVisibleInitialState(lastRemovePath, path);
+    const [opened, setOpen] = useState<boolean>(initState);
     const handleClick = () => setOpen(!opened);
-    const {removeHandler} = useContext<any>(DataContext);
 
     const {data, kids = {}} = item;
     const kidsArray = kidsIsNotEmpty(kids);
@@ -45,13 +46,13 @@ const BodyTr: React.FC<DataRowProps> = ({ item, path}: DataRowProps): ReactEleme
                 </tr>
             }
             {kidsArray && opened && (
-                    <tr className="data-table__tr-kit">
-                        <BodyExtraTd colSpan={dataValuesLength} kidsArray={kidsArray} path={path}/>
-                    </tr>
-                )
+                <tr className="data-table__tr-kit">
+                    <BodyExtraTd colSpan={dataValuesLength} kidsArray={kidsArray} path={path}/>
+                </tr>
+            )
             }
         </React.Fragment>
     );
 };
 
-export default React.memo(BodyTr, propsIsEqual('item'));
+export default BodyTr;

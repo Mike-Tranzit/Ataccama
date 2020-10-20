@@ -1,6 +1,6 @@
 import {IDataItem} from "../types";
 
-export const dataHandlers = (setList: Function, Creator: any) => {
+export const dataHandlers = (setList: Function, setLastRemovePath: Function, Creator: any) => {
     const handlerRemove = function (path: string) {
         setList((prevState: IDataItem[]) => {
             const stateChecker = new Creator(prevState, path);
@@ -8,6 +8,7 @@ export const dataHandlers = (setList: Function, Creator: any) => {
             stateChecker.checkLastPath();
             return stateChecker.getNewStateAsArray();
         });
+        setLastRemovePath(path);
     };
 
     const removeHandler = (path: string) => (event: Event) => {

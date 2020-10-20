@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Wrapper from "./components/Wrapper";
 import {IDataItem} from "./types";
@@ -9,12 +9,24 @@ import {dataHandlers} from "./utils/DataContextHandlers";
 
 
 function App() {
-    const dataService: DataService = new DataService();
-    const dataList: IDataItem[] = dataService.getData();
-    const [list, setList] = useState<IDataItem[]>(dataList);
-    const context = dataHandlers(setList, StateCreator);
+    const [list, setList] = useState<IDataItem[]>([]);
+    const [lastRemovePath, setLastRemovePath] = useState<string>('');
+    const [context, setContext] = useState({});
+    useEffect(() => {
+        const fetchData = () => {
+            const dataService: DataService = new DataService();
+            const dataList: IDataItem[] = dataService.getData();
+            setList(dataList);
+        }
+        const setInitContext = () => {
+            const initContext = dataHandlers(setList, setLastRemovePath, StateCreator);
+            setContext(initContext)
+        };
+        fetchData();
+        setInitContext();
+    }, []);
     return (
-        <DataContext.Provider value={context}>
+        <DataContext.Provider value={{...context, lastRemovePath}}>
             <div className="App">
                 <div className="container">
                     <Wrapper dataList={list} label={false} path=''/>
